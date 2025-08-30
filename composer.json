@@ -1,0 +1,21 @@
+{
+    "name": "thesohel/wp-plugin-generator",
+    "description": "WP-CLI plugin generator for WordPress",
+    "type": "wordpress-plugin",
+    "require": {
+        "php": ">=7.4"
+    },
+    "license": "GPL-2.0-or-later",
+    "autoload": {
+        "psr-4": {
+            "WppGenerator\\": "includes/"
+        }
+    },
+    "authors": [
+        {
+            "name": "justSohel",
+            "email": "thesohelrana.me@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev"
+}

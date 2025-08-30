@@ -1,0 +1,18 @@
+<?php
+namespace {{namespace}}\Controllers;
+
+use WP_REST_Request;
+use WP_REST_Response;
+
+class RestController {
+    public static function registerRoutes() {
+        register_rest_route('{{slug}}/v1', '/hello', [
+            'methods'  => 'GET',
+            'callback' => [self::class, 'hello'],
+        ]);
+    }
+
+    public static function hello(WP_REST_Request $request): WP_REST_Response {
+        return new WP_REST_Response(['message' => 'Hello from {{name}}!']);
+    }
+}

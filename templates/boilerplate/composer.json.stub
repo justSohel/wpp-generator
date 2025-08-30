@@ -1,0 +1,17 @@
+{
+    "name": "{{package_name}}",
+    "description": "{{description}}",
+    "type": "wordpress-plugin",
+    "license": "{{license}}",
+    "authors": [
+        {
+            "name": "{{author}}",
+            "homepage": "https://example.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "{{namespace}}\\": "app/"
+        }
+    }
+}

@@ -1,0 +1,22 @@
+<?php
+/**
+ * Plugin Name:  {{name}}
+ * Plugin URI:   {{uri}}
+ * Description:  {{name}} plugin.
+ * Version:      {{version}}
+ * Author:       {{author}}
+ * License:      {{license}}
+ * Text Domain:  {{slug}}
+ */
+
+defined('ABSPATH') || exit;
+
+if (!defined('{{const_prefix}}_VERSION')) define('{{const_prefix}}_VERSION', '{{version}}');
+if (!defined('{{const_prefix}}_PATH'))    define('{{const_prefix}}_PATH', plugin_dir_path(__FILE__));
+
+if (file_exists(__DIR__ . '/vendor/autoload.php')) {
+    require_once __DIR__ . '/vendor/autoload.php';
+}
+
+add_action('rest_api_init', ['{{namespace}}\Controllers\RestController', 'registerRoutes']);
+add_action('admin_menu', ['{{namespace}}\Controllers\AdminController', 'addMenu']);
