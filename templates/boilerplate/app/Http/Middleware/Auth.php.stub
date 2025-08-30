@@ -1,0 +1,17 @@
+<?php
+namespace {{namespace}}\Middleware;
+
+class Auth
+{
+    public function handle($request)
+    {
+        if (!isset($_SERVER['HTTP_AUTHORIZATION'])) {
+            return [
+                'code'    => 'rest_forbidden',
+                'message' => 'Unauthorized',
+                'data'    => ['status' => 401]
+            ];
+        }
+        return true;
+    }
+}

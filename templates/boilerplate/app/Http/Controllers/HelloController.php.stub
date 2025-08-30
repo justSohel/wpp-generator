@@ -1,0 +1,18 @@
+<?php
+namespace {{namespace}}\Http\Controllers;
+use WP_REST_Response;
+use WP_Http;
+
+class HelloController
+{
+    public function index(): WP_REST_Response
+    {
+        return new WP_REST_Response(
+        [
+            'controller' => 'HelloController',
+            'method' => 'index',
+            'msg'  => 'Hello from HelloController::index'
+        ]
+        , WP_Http::OK);
+    }
+}

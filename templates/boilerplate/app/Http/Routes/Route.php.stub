@@ -1,0 +1,82 @@
+<?php
+namespace {{namespace}}\Http\Routes;
+
+class Route
+{
+    private static $routes = [];
+
+    private $method;
+    private $uri;
+    private $action;
+    private $middlewares = [];
+
+    private function __construct(string $method, string $uri, $action)
+    {
+        $this->method = strtoupper($method);
+        $this->uri = $uri;
+        $this->action = $action;
+    }
+
+    public static function get(string $uri, $action): self
+    {
+        return self::add('GET', $uri, $action);
+    }
+
+    public static function post(string $uri, $action): self
+    {
+        return self::add('POST', $uri, $action);
+    }
+
+    private static function add(string $method, string $uri, $action): self
+    {
+        $route = new self($method, $uri, $action);
+        self::$routes[] = $route;
+        return $route;
+    }
+
+    public function middleware($middleware): self
+    {
+        if (is_array($middleware)) {
+            $this->middlewares = array_merge($this->middlewares, $middleware);
+        } else {
+            $this->middlewares[] = $middleware;
+        }
+        return $this;
+    }
+
+    public static function register()
+    {
+        foreach (self::$routes as $route) {
+            add_action('rest_api_init', function () use ($route) {
+                $args = [
+                    'methods'  => $route->method,
+                    'callback' => function ($request) use ($route) {
+                        foreach ($route->middlewares as $mw) {
+                            $mwClass = "{{namespace}}\\Middleware\\$mw";
+                            if (class_exists($mwClass)) {
+                                $result = (new $mwClass)->handle($request);
+                                if ($result !== true) {
+                                    return $result;
+                                }
+                            }
+                        }
+
+                        if (is_array($route->action) && count($route->action) === 2) {
+                            [$controller, $method] = $route->action;
+                            $controller = new $controller;
+                            return $controller->$method($request);
+                        }
+
+                        if (is_callable($route->action)) {
+                            return call_user_func($route->action, $request);
+                        }
+
+                        return null;
+                    }
+                ];
+
+                register_rest_route('{{slug}}/v1', ltrim($route->uri, '/'), $args);
+            });
+        }
+    }
+}

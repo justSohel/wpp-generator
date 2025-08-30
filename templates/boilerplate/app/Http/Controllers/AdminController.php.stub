@@ -1,5 +1,5 @@
 <?php
-namespace {{namespace}}\Controllers;
+namespace {{namespace}}\Http\Controllers;
 
 class AdminController {
     public static function addMenu() {
