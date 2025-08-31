@@ -1,5 +1,5 @@
 <?php
-class WPP_Generate_Command extends WP_CLI_Command {
+class WPP_Generate_Command {
 
     /**
      * Generate a new WordPress plugin boilerplate (MVC + Composer autoload).
@@ -23,7 +23,6 @@ class WPP_Generate_Command extends WP_CLI_Command {
      *
      *     wp make:plugin
      *     wp make:plugin --name="My Plugin" --author="John Doe"
-     * @throws WP_CLI\ExitException
      */
 
     public function __invoke($assoc_args)
@@ -54,9 +53,6 @@ class WPP_Generate_Command extends WP_CLI_Command {
     }
 
 
-    /**
-     * @throws \WP_CLI\ExitException
-     */
     private static function collectInputs(): array
     {
         $name = self::ask("Plugin Name (human-readable)", 'My Plugin');
@@ -86,9 +82,7 @@ class WPP_Generate_Command extends WP_CLI_Command {
         return compact('name', 'slug', 'description', 'author', 'uri', 'namespace', 'vendor', 'version', 'license', 'const_prefix', 'package_name');
     }
 
-    /**
-     * @throws WP_CLI\ExitException
-     */
+
     private static function getPluginDir($slug): string
     {
         $dir = WP_PLUGIN_DIR . '/' . $slug;
