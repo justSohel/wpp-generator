@@ -9,9 +9,20 @@
             "homepage": "https://example.com"
         }
     ],
+    "require": {
+        "wplazy/wplazyframework": "*"
+    },
     "autoload": {
         "psr-4": {
-            "{{namespace}}\\": "app/"
+            "{{namespace}}\\": "app/",
+            "WPLazy\\Framework\\": "vendor/wplazy/wplazyframework/src"
         }
-    }
+    },
+    "minimum-stability": "dev",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/justSohel/wplazyframework"
+        }
+    ]
 }

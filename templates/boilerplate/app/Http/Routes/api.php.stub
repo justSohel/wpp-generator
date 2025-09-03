@@ -1,9 +1,0 @@
-<?php
-use {{namespace}}\Http\Routes\Route;
-use {{namespace}}\Http\Controllers\HelloController;
-
-Route::get('/hello', [HelloController::class, 'index']);
-
-Route::get('/ping', function($req) {
-    return ['message' => 'pong'];
-});

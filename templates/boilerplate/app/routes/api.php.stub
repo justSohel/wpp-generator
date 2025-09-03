@@ -1,0 +1,9 @@
+<?php
+use WPLazy\Framework\Http\Router;
+use {{namespace}}\Http\Controllers\HelloController;
+
+Router::get('/hello', [HelloController::class, 'index']);
+
+Router::get('/ping', function($req) {
+    return ['message' => 'pong'];
+});

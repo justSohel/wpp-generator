@@ -20,8 +20,14 @@ if (file_exists(__DIR__ . '/vendor/autoload.php')) {
 
 add_action('admin_menu', ['{{namespace}}\Http\Controllers\AdminController', 'addMenu']);
 
+/*
 // Load routes
 add_action('plugins_loaded', function () {
     require_once __DIR__ . '/app/Http/Routes/api.php';
     {{namespace}}\Http\Routes\Route::register();
 });
+*/
+
+
+$kernel = new WPLazy\Framework\Kernel('{{slug}}/v1', __DIR__ . '/app/routes/api.php');
+$kernel->bootstrap();

@@ -11,7 +11,7 @@ class HelloController
         [
             'controller' => 'HelloController',
             'method' => 'index',
-            'msg'  => 'Hello from HelloController::index'
+            'msg'  => 'Hello from {{name}} plugin!'
         ]
         , WP_Http::OK);
     }
